@@ -24,7 +24,7 @@ cask "tlgme" do
   end
 
   name "tlgme"
-  desc "Send Telegram messages and wait for replies from the command line"
+  desc "Send Telegram messages and wait for replies from the command-line"
   homepage "https://github.com/bettertomorrow-dev/tlgme"
 
   livecheck do
@@ -33,9 +33,9 @@ cask "tlgme" do
 
   binary "tlgme"
 
-  postflight do
-    if OS.mac?
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/tlgme"]
+  postflight_steps do
+    on_macos do
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/tlgme"]
     end
   end
 
